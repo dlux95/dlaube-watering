@@ -1,0 +1,39 @@
+#define NUM_PLANTS        8
+#define NUM_SAMPLES       10
+#define SECONDS           1000
+#define STATE_LOOP_MILLIS 100
+#define DEBUG_MILLIS      1000
+
+Adafruit_ADS1115 adc1(0x48);
+Adafruit_ADS1115 adc2(0x49);
+
+const byte pins[] = {
+  25, 
+  23,
+  18, 
+  17, 
+  14, 
+  13,
+  15, 
+  26
+};
+
+namespace wifi{
+  const char* ssid        = "wifi-ssid";
+  const char* password    = "wifi-pass";
+  int         counter     = 0;
+  int         led         = 27;
+  int         led_counter = 0;
+  WiFiClient client;
+};
+
+namespace mqtt{
+  const char* server      = "mqtt-ip";
+  const int   port        = 1883;
+  const char* user        = "mqtt-user";
+  const char* password    = "mqtt-pass";
+  const char* topic       = "mqtt-topic";
+  int         led         = 0;
+  int         led_counter = 0;
+  PubSubClient client(wifi::client);
+};
